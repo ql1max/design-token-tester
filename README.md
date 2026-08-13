@@ -7,15 +7,21 @@ An interactive playground for design system tokens. Adjust color, type, spacing,
 - Vite + React + TypeScript
 - Cloudflare Workers Static Assets
 
+## Architecture and toolchain
+
+This is a local single-page Vite + React + TypeScript app; token calculations and previews run in the browser while Cloudflare Workers Static Assets serves the built `dist` directory. Use pnpm `11.21.0` exclusively for installs and scripts, with one repository-owned `pnpm-lock.yaml`. Bun has no role here, so there are no Bun scripts, dependencies, or lockfiles. TanStack is intentionally not included; add it only if future scope needs routed, data, or server primitives—not merely for consistency.
+
 ## Getting started
 
 ```bash
-npm install
-npm run dev
+pnpm install
+pnpm run dev
 ```
 
-## Deploying to Cloudflare Workers
+## Checks and deployment
 
 ```bash
-npm run deploy
+pnpm run check
+pnpm run build
+pnpm run deploy
 ```

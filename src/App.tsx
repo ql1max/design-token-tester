@@ -109,9 +109,7 @@ function contrastRatio(a: string, b: string): number {
 }
 
 function idealInk(hex: string): string {
-  return contrastRatio(hex, '#000000') >= contrastRatio(hex, '#ffffff')
-    ? '#000000'
-    : '#ffffff';
+  return contrastRatio(hex, '#000000') >= contrastRatio(hex, '#ffffff') ? '#000000' : '#ffffff';
 }
 
 function wcagLevel(ratio: number): 'AAA' | 'AA' | 'AA Large' | 'Fail' {
@@ -272,10 +270,7 @@ export default function App() {
   }, [tokens, accentInk]);
 
   const exportText = useMemo(
-    () =>
-      exportFormat === 'css'
-        ? buildCss(tokens, accentInk)
-        : buildJson(tokens, accentInk),
+    () => (exportFormat === 'css' ? buildCss(tokens, accentInk) : buildJson(tokens, accentInk)),
     [exportFormat, tokens, accentInk],
   );
 
@@ -299,12 +294,9 @@ export default function App() {
       <header className="topbar">
         <div>
           <h1>Design Token Tester</h1>
-          <p>
-            Ten tokens, one interface. Adjust the system and watch every
-            component follow.
-          </p>
+          <p>Ten tokens, one interface. Adjust the system and watch every component follow.</p>
         </div>
-        <div className="presets" role="group" aria-label="Presets">
+        <fieldset className="presets" aria-label="Presets">
           {presets.map((preset) => (
             <button
               key={preset.name}
@@ -315,7 +307,7 @@ export default function App() {
               {preset.name}
             </button>
           ))}
-        </div>
+        </fieldset>
       </header>
 
       <div className="layout">
@@ -332,21 +324,9 @@ export default function App() {
               value={tokens.surface}
               onChange={(v) => set('surface', v)}
             />
-            <ColorField
-              label="Text"
-              value={tokens.text}
-              onChange={(v) => set('text', v)}
-            />
-            <ColorField
-              label="Muted text"
-              value={tokens.muted}
-              onChange={(v) => set('muted', v)}
-            />
-            <ColorField
-              label="Accent"
-              value={tokens.accent}
-              onChange={(v) => set('accent', v)}
-            />
+            <ColorField label="Text" value={tokens.text} onChange={(v) => set('text', v)} />
+            <ColorField label="Muted text" value={tokens.muted} onChange={(v) => set('muted', v)} />
+            <ColorField label="Accent" value={tokens.accent} onChange={(v) => set('accent', v)} />
           </section>
 
           <section aria-labelledby="shape-tokens">
@@ -423,8 +403,8 @@ export default function App() {
             <div className="pv-hero">
               <h3 className="pv-h1">Every token in its place.</h3>
               <p className="pv-lead">
-                This interface is rendered from the ten variables on the left.
-                Nothing here has a hardcoded color, size, or corner.
+                This interface is rendered from the ten variables on the left. Nothing here has a
+                hardcoded color, size, or corner.
               </p>
               <div className="pv-actions">
                 <button type="button" className="pv-button pv-button--primary">
@@ -440,9 +420,7 @@ export default function App() {
               <div className="pv-card">
                 <span className="pv-badge">Form</span>
                 <h4 className="pv-h3">Join the field notes</h4>
-                <p className="pv-body">
-                  One email a month on design systems in practice.
-                </p>
+                <p className="pv-body">One email a month on design systems in practice.</p>
                 <div className="pv-form">
                   <input
                     type="text"
@@ -465,9 +443,7 @@ export default function App() {
                   <span className="pv-type pv-type--body">Aa</span>
                   <span className="pv-type pv-type--sm">Aa</span>
                 </div>
-                <p className="pv-small">
-                  Five steps derived from base size and ratio.
-                </p>
+                <p className="pv-small">Five steps derived from base size and ratio.</p>
               </div>
             </div>
           </div>
@@ -476,7 +452,7 @@ export default function App() {
             <div className="export__header">
               <h2 id="export-heading">Export</h2>
               <div className="export__actions">
-                <div className="segmented" role="group" aria-label="Export format">
+                <fieldset className="segmented" aria-label="Export format">
                   <button
                     type="button"
                     className={exportFormat === 'css' ? 'is-active' : ''}
@@ -491,7 +467,7 @@ export default function App() {
                   >
                     JSON
                   </button>
-                </div>
+                </fieldset>
                 <button type="button" className="copy-button" onClick={copyExport}>
                   {copied ? 'Copied' : 'Copy'}
                 </button>
